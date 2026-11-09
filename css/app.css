@@ -160,23 +160,6 @@ body.no-scroll { overflow: hidden; }
   font-size: 15px;
 }
 
-.install-btn {
-  margin-left: auto;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, .24);
-  background: rgba(255, 255, 255, .10);
-  color: #fff8f2;
-  font-size: 12px;
-  font-weight: 650;
-  backdrop-filter: blur(8px);
-}
-.install-btn .icon { width: 15px; height: 15px; }
-.install-btn[hidden] { display: none; }
-
 .eyebrow {
   margin: 0;
   font-size: 10.5px;

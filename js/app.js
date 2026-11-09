@@ -15,7 +15,6 @@
   var editKeyDate = null;
   var searchTimer = null;
   var searchSeq = 0;
-  var deferredPrompt = null;
   var toastTimer = null;
 
   var $ = function (id) { return document.getElementById(id); };
@@ -32,7 +31,7 @@
   function cacheElements() {
     [
       'screenImport', 'screenIdentify', 'screenCalendar',
-      'installBtn', 'pickPdf', 'fileInput', 'uploadCard', 'loadedCard',
+      'pickPdf', 'fileInput', 'uploadCard', 'loadedCard',
       'loadedMonth', 'loadedTitle', 'loadedMeta', 'continueBtn', 'addAnotherRol',
       'manageRolsBtn', 'importRolSelect', 'savedCount', 'importError', 'notifyBtn',
       'notifyOverlay', 'notifyTime', 'notifySave', 'notifyDisable', 'notifyLabel', 'notifySwitch',
@@ -328,7 +327,6 @@
     var hasRol = state.rols.length > 0;
     els.uploadCard.hidden = hasRol;
     els.loadedCard.hidden = !hasRol;
-    els.installBtn.hidden = !deferredPrompt;
 
     if (!hasRol) return;
 
@@ -1328,26 +1326,6 @@
       closeOverlay(els.menuOverlay);
       els.fileInput.click();
     });
-    window.addEventListener('beforeinstallprompt', function (e) {
-      e.preventDefault();
-      deferredPrompt = e;
-      els.installBtn.hidden = false;
-    });
-
-    els.installBtn.addEventListener('click', async function () {
-      if (!deferredPrompt) return;
-      deferredPrompt.prompt();
-      try { await deferredPrompt.userChoice; } catch (e) { /* ignore */ }
-      deferredPrompt = null;
-      els.installBtn.hidden = true;
-    });
-
-    window.addEventListener('appinstalled', function () {
-      deferredPrompt = null;
-      els.installBtn.hidden = true;
-      showToast('Mi Rol se ha instalado en tu móvil.');
-    });
-
     if (window.matchMedia) {
       var media = window.matchMedia('(prefers-color-scheme: dark)');
       var onChange = function () {

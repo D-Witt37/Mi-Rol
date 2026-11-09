@@ -1,5 +1,5 @@
 ﻿/* Service worker de Mi Rol Â· cachea la app para funcionar sin conexiÃ³n. */
-const CACHE = 'mirol-web-single-v1';
+const CACHE = 'mirol-web-single-v2';
 const ASSETS = [
   './',
   './index.html',
